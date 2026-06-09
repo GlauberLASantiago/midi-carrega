@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">FluidSynth + WebAssembly + SoundFont</p>
         <h1>Player MIDI Web</h1>
-        <p class="subtitle">Carregue um SoundFont <strong>.sf2</strong> e um arquivo MIDI <strong>.mid/.midi</strong> para sintetizar áudio no navegador.</p>
+        <p class="subtitle">Escolha um preset remoto de SoundFont ou carregue um arquivo local <strong>.sf2/.sf3</strong>, depois carregue um MIDI <strong>.mid/.midi</strong> para sintetizar áudio no navegador.</p>
       </div>
       <div class="status-card">
         <span class="status-dot" id="statusDot"></span>
@@ -20,18 +20,46 @@
       </div>
     </header>
 
-    <section class="panel grid">
-      <label class="file-box">
-        <span>1. SoundFont (.sf2)</span>
+    <section class="panel warning">
+      <strong>Aviso de licença:</strong>
+      estes presets são links remotos para arquivos em um repositório público. O app não redistribui os SoundFonts dentro deste ZIP. Verifique a licença de cada banco antes de publicar, vender ou empacotar com seu projeto.
+    </section>
+
+    <section class="panel preset-panel">
+      <div class="section-heading">
+        <div>
+          <h2>1. SoundFont</h2>
+          <p>Use um preset remoto ou selecione um arquivo local do seu computador.</p>
+        </div>
+      </div>
+
+      <div class="preset-grid">
+        <label>
+          Presets remotos
+          <select id="presetSelect"></select>
+        </label>
+        <button id="usePresetButton" type="button">Usar preset remoto</button>
+      </div>
+
+      <label class="file-box compact">
+        <span>Ou carregue SoundFont local (.sf2/.sf3)</span>
         <input id="soundFontInput" type="file" accept=".sf2,.sf3,audio/x-soundfont" />
         <small id="soundFontName">Nenhum SoundFont selecionado</small>
       </label>
+    </section>
 
+    <section class="panel grid">
       <label class="file-box">
         <span>2. MIDI (.mid/.midi)</span>
         <input id="midiInput" type="file" accept=".mid,.midi,audio/midi" />
         <small id="midiName">Nenhum MIDI selecionado</small>
       </label>
+
+      <div class="file-box selected-source">
+        <span>SoundFont escolhido</span>
+        <strong id="selectedSoundFontLabel">Nenhum</strong>
+        <small id="selectedSoundFontDetail">Selecione um preset remoto ou arquivo local.</small>
+      </div>
     </section>
 
     <section class="panel controls">
@@ -62,7 +90,7 @@
     </section>
 
     <footer>
-      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Para melhores resultados, use um SoundFont General MIDI, como FluidR3 GM, GeneralUser GS ou MuseScore General.</p>
+      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados via <code>fetch()</code>; se algum banco falhar, pode ser por CORS, tamanho, formato <code>.sf3</code> ou indisponibilidade do arquivo.</p>
     </footer>
   </main>
 

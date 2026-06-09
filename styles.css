@@ -7,6 +7,7 @@
   --muted: #aeb7c7;
   --accent: #70e0a8;
   --danger: #ff6b6b;
+  --warn: #ffd166;
   --border: #2c3447;
 }
 
@@ -46,6 +47,10 @@ body {
 h1 {
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1;
+  margin: 0;
+}
+
+h2 {
   margin: 0;
 }
 
@@ -95,10 +100,51 @@ h1 {
   margin-bottom: 18px;
 }
 
+.warning {
+  border-color: color-mix(in srgb, var(--warn), var(--border) 50%);
+  color: #fff2c5;
+  line-height: 1.55;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.preset-grid label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+}
+
+select {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #101521;
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 12px;
 }
 
 .file-box {
@@ -108,6 +154,14 @@ h1 {
   border-radius: 14px;
   background: var(--panel-2);
   border: 1px dashed #46516c;
+}
+
+.file-box.compact {
+  margin-top: 4px;
+}
+
+.selected-source {
+  border-style: solid;
 }
 
 .file-box span,
@@ -172,6 +226,7 @@ input[type="range"] {
 
 .log-panel h2 {
   margin-top: 0;
+  margin-bottom: 12px;
 }
 
 pre {
@@ -194,7 +249,8 @@ footer {
 @media (max-width: 760px) {
   .hero,
   .grid,
-  .mixer {
+  .mixer,
+  .preset-grid {
     grid-template-columns: 1fr;
     display: grid;
   }

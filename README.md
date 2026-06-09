@@ -1,64 +1,49 @@
 # FluidSynth WebAssembly Player
 
-Protótipo HTML de player MIDI usando **FluidSynth em WebAssembly**, via a biblioteca `js-synthesizer`.
+Protótipo de player MIDI no navegador usando **FluidSynth em WebAssembly** via `js-synthesizer`.
 
-## O que ele faz
+## O que esta versão faz
 
-- Carrega um SoundFont `.sf2` escolhido pelo usuário.
-- Carrega um arquivo MIDI `.mid` ou `.midi`.
-- Sintetiza áudio no navegador com Web Audio API.
-- Tem interface simples com Play, Pause/Stop, Stop e volume geral.
+- Carrega um arquivo MIDI `.mid` ou `.midi` local.
+- Carrega SoundFont local `.sf2/.sf3`.
+- Inclui presets remotos de SoundFonts hospedadas em `wrightflyer/SF2_SoundFonts`.
+- Não embute os arquivos `.sf2/.sf3` no projeto; apenas guarda os links.
+- Toca o MIDI usando Web Audio.
 
 ## Como rodar
 
-Por causa das restrições de segurança do navegador, rode por um servidor local, não abrindo o `index.html` diretamente por `file://`.
-
-Opção com Python:
+Não abra o `index.html` diretamente com `file://`. Sirva por HTTP local:
 
 ```bash
 cd fluidsynth-web-app
 python3 -m http.server 8000
 ```
 
-Depois abra:
+Abra:
 
 ```text
 http://localhost:8000
 ```
 
-## Arquivos necessários do usuário
+## Como usar
 
-Você precisa selecionar:
+1. Escolha um preset remoto e clique em **Usar preset remoto**.
+2. Ou selecione um SoundFont local `.sf2/.sf3`.
+3. Selecione um MIDI `.mid/.midi`.
+4. Clique em **Carregar no sintetizador**.
+5. Clique em **Play**.
 
-1. Um SoundFont `.sf2`, por exemplo:
-   - FluidR3 GM
-   - GeneralUser GS
-   - MuseScore General
-2. Um arquivo MIDI `.mid` ou `.midi`.
+## Observações técnicas
 
-## Dependência usada
+- Presets remotos são baixados com `fetch()` a partir de URLs `raw.githubusercontent.com`.
+- Arquivos grandes podem demorar ou consumir bastante memória.
+- Alguns `.sf3` podem falhar se o build WebAssembly do FluidSynth não tiver suporte de decodificação adequado.
+- O botão Pause funciona como parada suave nesta versão.
 
-O protótipo carrega via CDN:
+## Licença e redistribuição de SoundFonts
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/externals/libfluidsynth-2.4.6.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/dist/js-synthesizer.min.js"></script>
-```
+Este projeto **não redistribui** os SoundFonts; ele apenas contém links para arquivos remotos que você forneceu.
 
-A documentação do `js-synthesizer` informa que ele usa uma versão WebAssembly de FluidSynth como motor de síntese.
+Antes de publicar, vender, empacotar em app, ou hospedar uma cópia própria dos `.sf2/.sf3`, verifique a licença individual de cada banco. SoundFont geralmente contém samples de áudio; portanto “estar no GitHub” ou “ser grátis para baixar” não significa automaticamente que pode ser redistribuído.
 
-## Limitações desta primeira versão
-
-- O botão Pause atua como parada suave nesta implementação simples; pausa/resume real pode ser adicionado com controle mais fino do sequencer/player.
-- Reverb e Chorus estão previstos na interface, mas o ajuste fino precisa mapear os métodos/parâmetros exatos da versão carregada.
-- SoundFonts grandes podem demorar para carregar e consumir bastante memória.
-- Alguns navegadores bloqueiam áudio até o primeiro clique do usuário; por isso o carregamento também ativa/resume o AudioContext.
-
-## Próximos recursos recomendados
-
-- Mixer dos 16 canais MIDI.
-- Visualização de eventos MIDI.
-- Piano roll.
-- Troca de instrumento por canal.
-- Exportação WAV via renderização offline.
-- Modo totalmente offline, baixando os arquivos JS/WASM da dependência para a pasta local.
+Os nomes `Roland_SC-88.sf2`, `Yamaha-SY22.sf2`, `AWE ROM gm.sf2` e `CTK-230_SoundFont.sf2` indicam possível origem de hardware/ROM comercial. Eles foram mantidos como presets porque você pediu, mas não devem ser tratados como livres sem verificação.
