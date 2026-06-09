@@ -39,6 +39,7 @@
           <select id="presetSelect"></select>
         </label>
         <button id="usePresetButton" type="button">Usar preset remoto</button>
+        <a id="presetDownloadLink" class="download-link" href="#" target="_blank" rel="noreferrer">Abrir/baixar preset direto</a>
       </div>
 
       <label class="file-box compact">
@@ -90,7 +91,7 @@
     </section>
 
     <footer>
-      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados via <code>fetch()</code>; se algum banco falhar, pode ser por CORS, tamanho, arquivo indisponível, Git LFS ou licença/remoção no repositório remoto.</p>
+      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados por URLs diretas via <code>fetch()</code>. Se algum banco falhar, use o link “Abrir/baixar preset direto” e carregue o arquivo baixado como SoundFont local.</p>
     </footer>
   </main>
 

@@ -259,3 +259,19 @@ footer {
     min-width: 0;
   }
 }
+
+.download-link {
+  align-self: center;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.8rem;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.download-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}

@@ -59,3 +59,13 @@ Esta versão carrega presets remotos com fallback:
 4. Usa `libfluidsynth-2.4.6-with-libsndfile.js`, necessário para tentar carregar `.sf3`.
 
 Se um preset remoto ainda falhar, abra o link no navegador, baixe o arquivo manualmente e use a opção de SoundFont local. Comece testando com `2mb_gmgs.sf2`, que é pequeno.
+
+
+## Ajuste desta versão
+
+Os presets agora usam URLs diretas explícitas por arquivo. A ordem de tentativa é:
+
+1. `https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/<arquivo>`
+2. `https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/<arquivo>`
+
+A versão não usa `raw.githubusercontent.com` como URL de preset. Se o navegador ainda bloquear o download remoto, clique em “Abrir/baixar preset direto”, salve o arquivo `.sf2`/`.sf3` e carregue pelo seletor local.

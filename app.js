@@ -2,49 +2,159 @@ const REPO_OWNER = 'wrightflyer';
 const REPO_NAME = 'SF2_SoundFonts';
 const REPO_BRANCH = 'master';
 
-const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/`;
-const CDN_BASE = `https://cdn.jsdelivr.net/gh/${REPO_OWNER}/${REPO_NAME}@${REPO_BRANCH}/`;
-
-const PRESET_FILES = [
-  ['2mb_gmgs.sf2', 'Pequeno; teste rápido recomendado.'],
-  ['4gmgsmt.sf2', 'GM/GS compacto.'],
-  ['8mbgm_plus13.sf2', 'GM compacto com extras.'],
-  ['TimGM6mb.sf2', 'Banco GM clássico compacto.'],
-  ['GeneralUser GS v1.471.sf2', 'GM/GS muito usado; ver licença do autor original.'],
-  ['GeneralUser GS MuseScore v1.442.sf2', 'Variação do GeneralUser GS.'],
-  ['FluidR3Mono_GM.sf3', 'SF3; agora usa build com libsndfile.'],
-  ['MuseScore_General.sf3', 'SF3; agora usa build com libsndfile.'],
-  ['32MbGMStereo.sf2', 'Maior; pode demorar para baixar.'],
-  ['031.9mg reality gm gs bank.SF2', 'GM/GS; licença não verificada.'],
-  ['AWE ROM gm.sf2', 'Cuidado: nome sugere origem ROM.'],
-  ['Android Synthesizer.sf2', 'Licença não verificada.'],
-  ['CTK-230_SoundFont.sf2', 'Cuidado: nome sugere teclado específico.'],
-  ['Chaos Bank V1.9 (12Mb).sf2', 'Banco GM alternativo; confirme licença.'],
-  ['Jnsgm2.sf2', 'JNS-GM; confirme licença.'],
-  ['Masterpiece.sf2', 'Banco GM alternativo; confirme licença.'],
-  ['Unison.SF2', 'Banco GM alternativo; confirme licença.'],
-  ['gm.sf2', 'Genérico; licença não verificada.'],
-  ['gm_1.sf2', 'Genérico; licença não verificada.'],
-  ['merlin_gmv32.sf2', 'Merlin GM; confirme licença.'],
-  ['mustheory2.sf2', 'Licença não verificada.'],
-  ['weedsgm3.sf2', 'WeedsGM3; confirme licença do autor.'],
-  ['Roland_SC-88.sf2', 'Cuidado: nome sugere Roland SC-88.'],
-  ['Yamaha-SY22.sf2', 'Cuidado: nome sugere Yamaha SY22.']
+// Presets com URLs diretas explícitas. Não usamos raw.githubusercontent.com aqui.
+// Ordem: jsDelivr CDN direto -> GitHub direct-download (/raw/refs/heads/...).
+const SOUND_FONT_PRESETS = [
+  {
+    name: '031.9mg reality gm gs bank.SF2',
+    note: 'GM/GS; licença não verificada.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/031.9mg%20reality%20gm%20gs%20bank.SF2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/031.9mg%20reality%20gm%20gs%20bank.SF2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/031.9mg%20reality%20gm%20gs%20bank.SF2'
+  },
+  {
+    name: '2mb_gmgs.sf2',
+    note: 'Pequeno; teste rápido recomendado.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/2mb_gmgs.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/2mb_gmgs.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/2mb_gmgs.sf2'
+  },
+  {
+    name: '32MbGMStereo.sf2',
+    note: 'Maior; pode demorar para baixar.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/32MbGMStereo.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/32MbGMStereo.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/32MbGMStereo.sf2'
+  },
+  {
+    name: '4gmgsmt.sf2',
+    note: 'GM/GS compacto.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/4gmgsmt.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/4gmgsmt.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/4gmgsmt.sf2'
+  },
+  {
+    name: '8mbgm_plus13.sf2',
+    note: 'GM compacto com extras.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/8mbgm_plus13.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/8mbgm_plus13.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/8mbgm_plus13.sf2'
+  },
+  {
+    name: 'AWE ROM gm.sf2',
+    note: 'Cuidado: nome sugere origem ROM.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/AWE%20ROM%20gm.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/AWE%20ROM%20gm.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/AWE%20ROM%20gm.sf2'
+  },
+  {
+    name: 'Android Synthesizer.sf2',
+    note: 'Licença não verificada.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Android%20Synthesizer.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Android%20Synthesizer.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Android%20Synthesizer.sf2'
+  },
+  {
+    name: 'CTK-230_SoundFont.sf2',
+    note: 'Cuidado: nome sugere teclado específico.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/CTK-230_SoundFont.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/CTK-230_SoundFont.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/CTK-230_SoundFont.sf2'
+  },
+  {
+    name: 'Chaos Bank V1.9 (12Mb).sf2',
+    note: 'Banco GM alternativo; confirme licença.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Chaos%20Bank%20V1.9%20%2812Mb%29.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Chaos%20Bank%20V1.9%20%2812Mb%29.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Chaos%20Bank%20V1.9%20%2812Mb%29.sf2'
+  },
+  {
+    name: 'FluidR3Mono_GM.sf3',
+    note: 'SF3; usa build com libsndfile.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/FluidR3Mono_GM.sf3', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/FluidR3Mono_GM.sf3'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/FluidR3Mono_GM.sf3'
+  },
+  {
+    name: 'GeneralUser GS MuseScore v1.442.sf2',
+    note: 'Variação do GeneralUser GS.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/GeneralUser%20GS%20MuseScore%20v1.442.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/GeneralUser%20GS%20MuseScore%20v1.442.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/GeneralUser%20GS%20MuseScore%20v1.442.sf2'
+  },
+  {
+    name: 'GeneralUser GS v1.471.sf2',
+    note: 'GM/GS muito usado; ver licença do autor original.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/GeneralUser%20GS%20v1.471.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/GeneralUser%20GS%20v1.471.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/GeneralUser%20GS%20v1.471.sf2'
+  },
+  {
+    name: 'Jnsgm2.sf2',
+    note: 'JNS-GM; confirme licença.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Jnsgm2.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Jnsgm2.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Jnsgm2.sf2'
+  },
+  {
+    name: 'Masterpiece.sf2',
+    note: 'Banco GM alternativo; confirme licença.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Masterpiece.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Masterpiece.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Masterpiece.sf2'
+  },
+  {
+    name: 'MuseScore_General.sf3',
+    note: 'SF3; usa build com libsndfile.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/MuseScore_General.sf3', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/MuseScore_General.sf3'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/MuseScore_General.sf3'
+  },
+  {
+    name: 'Roland_SC-88.sf2',
+    note: 'Cuidado: nome sugere Roland SC-88.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Roland_SC-88.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Roland_SC-88.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Roland_SC-88.sf2'
+  },
+  {
+    name: 'TimGM6mb.sf2',
+    note: 'Banco GM clássico compacto.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/TimGM6mb.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/TimGM6mb.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/TimGM6mb.sf2'
+  },
+  {
+    name: 'Unison.SF2',
+    note: 'Banco GM alternativo; confirme licença.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Unison.SF2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Unison.SF2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Unison.SF2'
+  },
+  {
+    name: 'Yamaha-SY22.sf2',
+    note: 'Cuidado: nome sugere Yamaha SY22.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/Yamaha-SY22.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Yamaha-SY22.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/Yamaha-SY22.sf2'
+  },
+  {
+    name: 'gm.sf2',
+    note: 'Genérico; licença não verificada.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/gm.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/gm.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/gm.sf2'
+  },
+  {
+    name: 'gm_1.sf2',
+    note: 'Genérico; licença não verificada.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/gm_1.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/gm_1.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/gm_1.sf2'
+  },
+  {
+    name: 'merlin_gmv32.sf2',
+    note: 'Merlin GM; confirme licença.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/merlin_gmv32.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/merlin_gmv32.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/merlin_gmv32.sf2'
+  },
+  {
+    name: 'mustheory2.sf2',
+    note: 'Licença não verificada.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/mustheory2.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/mustheory2.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/mustheory2.sf2'
+  },
+  {
+    name: 'weedsgm3.sf2',
+    note: 'WeedsGM3; confirme licença do autor.',
+    urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/weedsgm3.sf2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/weedsgm3.sf2'],
+    downloadUrl: 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/weedsgm3.sf2'
+  },
 ];
-
-const SOUND_FONT_PRESETS = PRESET_FILES.map(([file, note]) => ({
-  name: file,
-  file,
-  note,
-  urls: [
-    CDN_BASE + encodePathForUrl(file),
-    RAW_BASE + encodePathForUrl(file)
-  ]
-}));
 
 const els = {
   presetSelect: document.getElementById('presetSelect'),
   usePresetButton: document.getElementById('usePresetButton'),
+  presetDownloadLink: document.getElementById('presetDownloadLink'),
   soundFontInput: document.getElementById('soundFontInput'),
   midiInput: document.getElementById('midiInput'),
   soundFontName: document.getElementById('soundFontName'),
@@ -94,7 +204,11 @@ function selectPreset(index) {
   els.selectedSoundFontLabel.textContent = selectedPreset.name;
   els.selectedSoundFontDetail.textContent = `Preset remoto: ${selectedPreset.note}`;
   log(`Preset selecionado: ${selectedPreset.name}`);
-  log(`URL primária: ${selectedPreset.urls[0]}`);
+  if (els.presetDownloadLink) {
+    els.presetDownloadLink.href = selectedPreset.downloadUrl || selectedPreset.urls[0];
+    els.presetDownloadLink.download = selectedPreset.name;
+  }
+  log(`URL direta primária: ${selectedPreset.urls[0]}`);
 }
 
 function selectLocalSoundFont(file) {
@@ -297,7 +411,7 @@ async function loadFilesIntoSynth() {
     console.error(err);
     setStatus('Erro ao carregar', 'error');
     log(`ERRO: ${err.message || err}`);
-    log('Dica: teste primeiro com 2mb_gmgs.sf2. Se remoto falhar, abra o link no navegador, baixe o .sf2/.sf3 e carregue como arquivo local.');
+    log('Dica: teste primeiro com 2mb_gmgs.sf2. Se remoto falhar, clique em ‘Abrir/baixar preset direto’, baixe o .sf2/.sf3 e carregue como arquivo local.');
     setControls(false);
     await resetSynth();
   }
