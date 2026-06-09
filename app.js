@@ -6,6 +6,28 @@ const REPO_BRANCH = 'master';
 // Ordem: jsDelivr CDN direto -> GitHub direct-download (/raw/refs/heads/...).
 const SOUND_FONT_PRESETS = [
   {
+    name: 'MuseScore_General.sf3 (oficial)',
+    note: 'Preset recomendado: SoundFont oficial do MuseScore, MIT; ~38 MB.',
+    urls: [
+      'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3',
+      'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/MuseScore_General.sf3'
+    ],
+    downloadUrl: 'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3',
+    licenseUrl: 'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General_License.md',
+    recommended: true
+  },
+  {
+    name: 'MuseScore_General.sf2 (oficial, grande)',
+    note: 'Versão SF2 oficial do MuseScore; ~206 MB, use se SF3 falhar.',
+    urls: [
+      'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2'
+    ],
+    downloadUrl: 'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2',
+    licenseUrl: 'https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General_License.md',
+    recommended: true
+  },
+
+  {
     name: '031.9mg reality gm gs bank.SF2',
     note: 'GM/GS; licença não verificada.',
     urls: ['https://cdn.jsdelivr.net/gh/wrightflyer/SF2_SoundFonts@master/031.9mg%20reality%20gm%20gs%20bank.SF2', 'https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/031.9mg%20reality%20gm%20gs%20bank.SF2'],
@@ -206,7 +228,10 @@ function selectPreset(index) {
   log(`Preset selecionado: ${selectedPreset.name}`);
   if (els.presetDownloadLink) {
     els.presetDownloadLink.href = selectedPreset.downloadUrl || selectedPreset.urls[0];
-    els.presetDownloadLink.download = selectedPreset.name;
+    els.presetDownloadLink.download = selectedPreset.name.replace(/ \(.*\)$/,'');
+  }
+  if (selectedPreset.licenseUrl) {
+    log(`Licença/origem: ${selectedPreset.licenseUrl}`);
   }
   log(`URL direta primária: ${selectedPreset.urls[0]}`);
 }
@@ -518,7 +543,7 @@ window.addEventListener('load', async () => {
     setStatus('Motor FluidSynth pronto', 'ready');
     log('JSSynth/FluidSynth WebAssembly pronto.');
     log('Build com libsndfile ativado para tentar suportar .sf3.');
-    log(`${SOUND_FONT_PRESETS.length} presets remotos disponíveis.`);
+    log(`${SOUND_FONT_PRESETS.length} presets remotos disponíveis. O preset inicial é MuseScore_General.sf3 oficial.`);
   } catch (err) {
     setStatus('Falha ao inicializar', 'error');
     log(`ERRO: ${err.message || err}`);

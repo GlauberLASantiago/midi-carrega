@@ -11,8 +11,8 @@
     <header class="hero">
       <div>
         <p class="eyebrow">FluidSynth + WebAssembly + SoundFont</p>
-        <h1>Player MIDI Web</h1>
-        <p class="subtitle">Escolha um preset remoto de SoundFont ou carregue um arquivo local <strong>.sf2/.sf3</strong>, depois carregue um MIDI <strong>.mid/.midi</strong> para sintetizar áudio no navegador.</p>
+        <h1>Player MIDI Web com preset MuseScore</h1>
+        <p class="subtitle">Use o preset externo MuseScore_General.sf3 ou escolha outro SoundFont remoto/local <strong>.sf2/.sf3</strong>, depois carregue um MIDI <strong>.mid/.midi</strong> para sintetizar áudio no navegador.</p>
       </div>
       <div class="status-card">
         <span class="status-dot" id="statusDot"></span>
@@ -22,14 +22,14 @@
 
     <section class="panel warning">
       <strong>Aviso de licença:</strong>
-      estes presets são links remotos para arquivos em um repositório público. O app não redistribui os SoundFonts dentro deste ZIP. Verifique a licença de cada banco antes de publicar, vender ou empacotar com seu projeto.
+      o preset MuseScore_General.sf3 é carregado de fonte externa; o ZIP não redistribui SoundFonts. Verifique e preserve a licença quando publicar ou empacotar o projeto.
     </section>
 
     <section class="panel preset-panel">
       <div class="section-heading">
         <div>
           <h2>1. SoundFont</h2>
-          <p>Use um preset remoto ou selecione um arquivo local do seu computador.</p>
+          <p>O primeiro preset é MuseScore_General.sf3 externo. Você também pode selecionar outro preset ou um arquivo local.</p>
         </div>
       </div>
 
@@ -91,7 +91,7 @@
     </section>
 
     <footer>
-      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados por URLs diretas via <code>fetch()</code>. Se algum banco falhar, use o link “Abrir/baixar preset direto” e carregue o arquivo baixado como SoundFont local.</p>
+      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados por URLs diretas via <code>fetch()</code>. Se o preset MuseScore ou outro banco falhar, use o link “Abrir/baixar preset direto” e carregue o arquivo baixado como SoundFont local.</p>
     </footer>
   </main>
 

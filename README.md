@@ -6,7 +6,7 @@ Protótipo de player MIDI no navegador usando **FluidSynth em WebAssembly** via 
 
 - Carrega um arquivo MIDI `.mid` ou `.midi` local.
 - Carrega SoundFont local `.sf2/.sf3`.
-- Inclui presets remotos de SoundFonts hospedadas em `wrightflyer/SF2_SoundFonts`.
+- Inclui `MuseScore_General.sf3` como primeiro preset externo, apontando para o mirror público OSUOSL do MuseScore, além dos presets remotos anteriores.
 - Não embute os arquivos `.sf2/.sf3` no projeto; apenas guarda os links.
 - Toca o MIDI usando Web Audio.
 
@@ -35,7 +35,7 @@ http://localhost:8000
 
 ## Observações técnicas
 
-- Presets remotos são baixados com `fetch()` a partir de URLs `raw.githubusercontent.com`.
+- Presets remotos são baixados com `fetch()` a partir de URLs diretas. O preset MuseScore usa `https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3`.
 - Arquivos grandes podem demorar ou consumir bastante memória.
 - Alguns `.sf3` podem falhar se o build WebAssembly do FluidSynth não tiver suporte de decodificação adequado.
 - O botão Pause funciona como parada suave nesta versão.
@@ -69,3 +69,32 @@ Os presets agora usam URLs diretas explícitas por arquivo. A ordem de tentativa
 2. `https://github.com/wrightflyer/SF2_SoundFonts/raw/refs/heads/master/<arquivo>`
 
 A versão não usa `raw.githubusercontent.com` como URL de preset. Se o navegador ainda bloquear o download remoto, clique em “Abrir/baixar preset direto”, salve o arquivo `.sf2`/`.sf3` e carregue pelo seletor local.
+
+
+## Preset MuseScore adicionado
+
+O primeiro item do menu é agora:
+
+```text
+MuseScore_General.sf3 (oficial)
+```
+
+URL usada pelo app:
+
+```text
+https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3
+```
+
+Licença/origem indicada no app:
+
+```text
+https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General_License.md
+```
+
+Também deixei a versão `.sf2` oficial como fallback manual/remoto:
+
+```text
+https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2
+```
+
+A versão `.sf3` é muito menor e deve ser testada primeiro. Se o navegador bloquear o `fetch()` do servidor externo por CORS, clique em **Abrir/baixar preset direto**, baixe o arquivo e carregue como SoundFont local.
