@@ -1,125 +1,46 @@
-const SOUND_FONT_PRESETS = [
-  {
-    name: '2mb_gmgs.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/2mb_gmgs.sf2',
-    note: 'Pequeno; bom para teste rápido.'
-  },
-  {
-    name: '4gmgsmt.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/4gmgsmt.sf2',
-    note: 'GM/GS compacto.'
-  },
-  {
-    name: '8mbgm_plus13.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/8mbgm_plus13.sf2',
-    note: 'GM compacto com extras.'
-  },
-  {
-    name: 'TimGM6mb.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/TimGM6mb.sf2',
-    note: 'Banco GM clássico compacto.'
-  },
-  {
-    name: 'GeneralUser GS v1.471.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/GeneralUser%20GS%20v1.471.sf2',
-    note: 'GM/GS muito usado; ver licença incluída pelo autor original.'
-  },
-  {
-    name: 'GeneralUser GS MuseScore v1.442.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/GeneralUser%20GS%20MuseScore%20v1.442.sf2',
-    note: 'Variação do GeneralUser GS.'
-  },
-  {
-    name: 'FluidR3Mono_GM.sf3',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/FluidR3Mono_GM.sf3',
-    note: 'SF3 compactado; pode depender do suporte do build WebAssembly.'
-  },
-  {
-    name: 'MuseScore_General.sf3',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/MuseScore_General.sf3',
-    note: 'SF3 compactado; pode depender do suporte do build WebAssembly.'
-  },
-  {
-    name: '32MbGMStereo.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/32MbGMStereo.sf2',
-    note: 'Maior; pode demorar para baixar.'
-  },
-  {
-    name: '031.9mg reality gm gs bank.SF2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/031.9mg%20reality%20gm%20gs%20bank.SF2',
-    note: 'GM/GS; licença não verificada.'
-  },
-  {
-    name: 'AWE ROM gm.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/AWE%20ROM%20gm.sf2',
-    note: 'Nome sugere origem ROM; use apenas se tiver segurança jurídica.'
-  },
-  {
-    name: 'Android Synthesizer.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Android%20Synthesizer.sf2',
-    note: 'Licença não verificada.'
-  },
-  {
-    name: 'CTK-230_SoundFont.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/CTK-230_SoundFont.sf2',
-    note: 'Nome sugere teclado específico; licença não verificada.'
-  },
-  {
-    name: 'Chaos Bank V1.9 (12Mb).sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Chaos%20Bank%20V1.9%20(12Mb).sf2',
-    note: 'Banco GM alternativo; confirme licença.'
-  },
-  {
-    name: 'Jnsgm2.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Jnsgm2.sf2',
-    note: 'JNS-GM; confirme licença.'
-  },
-  {
-    name: 'Masterpiece.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Masterpiece.sf2',
-    note: 'Banco GM alternativo; confirme licença.'
-  },
-  {
-    name: 'Unison.SF2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Unison.SF2',
-    note: 'Banco GM alternativo; confirme licença.'
-  },
-  {
-    name: 'gm.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/gm.sf2',
-    note: 'Genérico; licença não verificada.'
-  },
-  {
-    name: 'gm_1.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/gm_1.sf2',
-    note: 'Genérico; licença não verificada.'
-  },
-  {
-    name: 'merlin_gmv32.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/merlin_gmv32.sf2',
-    note: 'Merlin GM; confirme licença.'
-  },
-  {
-    name: 'mustheory2.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/mustheory2.sf2',
-    note: 'Licença não verificada.'
-  },
-  {
-    name: 'weedsgm3.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/weedsgm3.sf2',
-    note: 'WeedsGM3; confirme licença do autor.'
-  },
-  {
-    name: 'Roland_SC-88.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Roland_SC-88.sf2',
-    note: 'Nome sugere Roland SC-88; uso/redistribuição pode ser problemático.'
-  },
-  {
-    name: 'Yamaha-SY22.sf2',
-    url: 'https://raw.githubusercontent.com/wrightflyer/SF2_SoundFonts/master/Yamaha-SY22.sf2',
-    note: 'Nome sugere Yamaha SY22; uso/redistribuição pode ser problemático.'
-  }
+const REPO_OWNER = 'wrightflyer';
+const REPO_NAME = 'SF2_SoundFonts';
+const REPO_BRANCH = 'master';
+
+const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/`;
+const CDN_BASE = `https://cdn.jsdelivr.net/gh/${REPO_OWNER}/${REPO_NAME}@${REPO_BRANCH}/`;
+
+const PRESET_FILES = [
+  ['2mb_gmgs.sf2', 'Pequeno; teste rápido recomendado.'],
+  ['4gmgsmt.sf2', 'GM/GS compacto.'],
+  ['8mbgm_plus13.sf2', 'GM compacto com extras.'],
+  ['TimGM6mb.sf2', 'Banco GM clássico compacto.'],
+  ['GeneralUser GS v1.471.sf2', 'GM/GS muito usado; ver licença do autor original.'],
+  ['GeneralUser GS MuseScore v1.442.sf2', 'Variação do GeneralUser GS.'],
+  ['FluidR3Mono_GM.sf3', 'SF3; agora usa build com libsndfile.'],
+  ['MuseScore_General.sf3', 'SF3; agora usa build com libsndfile.'],
+  ['32MbGMStereo.sf2', 'Maior; pode demorar para baixar.'],
+  ['031.9mg reality gm gs bank.SF2', 'GM/GS; licença não verificada.'],
+  ['AWE ROM gm.sf2', 'Cuidado: nome sugere origem ROM.'],
+  ['Android Synthesizer.sf2', 'Licença não verificada.'],
+  ['CTK-230_SoundFont.sf2', 'Cuidado: nome sugere teclado específico.'],
+  ['Chaos Bank V1.9 (12Mb).sf2', 'Banco GM alternativo; confirme licença.'],
+  ['Jnsgm2.sf2', 'JNS-GM; confirme licença.'],
+  ['Masterpiece.sf2', 'Banco GM alternativo; confirme licença.'],
+  ['Unison.SF2', 'Banco GM alternativo; confirme licença.'],
+  ['gm.sf2', 'Genérico; licença não verificada.'],
+  ['gm_1.sf2', 'Genérico; licença não verificada.'],
+  ['merlin_gmv32.sf2', 'Merlin GM; confirme licença.'],
+  ['mustheory2.sf2', 'Licença não verificada.'],
+  ['weedsgm3.sf2', 'WeedsGM3; confirme licença do autor.'],
+  ['Roland_SC-88.sf2', 'Cuidado: nome sugere Roland SC-88.'],
+  ['Yamaha-SY22.sf2', 'Cuidado: nome sugere Yamaha SY22.']
 ];
+
+const SOUND_FONT_PRESETS = PRESET_FILES.map(([file, note]) => ({
+  name: file,
+  file,
+  note,
+  urls: [
+    CDN_BASE + encodePathForUrl(file),
+    RAW_BASE + encodePathForUrl(file)
+  ]
+}));
 
 const els = {
   presetSelect: document.getElementById('presetSelect'),
@@ -148,8 +69,13 @@ let synthNode = null;
 let gainNode = null;
 let currentSoundFontId = null;
 let loaded = false;
-let paused = false;
 let selectedPreset = null;
+let lastSfontBuffer = null;
+let lastMidiBuffer = null;
+
+function encodePathForUrl(path) {
+  return path.split('/').map(encodeURIComponent).join('/');
+}
 
 function initPresetList() {
   els.presetSelect.innerHTML = '';
@@ -168,10 +94,12 @@ function selectPreset(index) {
   els.selectedSoundFontLabel.textContent = selectedPreset.name;
   els.selectedSoundFontDetail.textContent = `Preset remoto: ${selectedPreset.note}`;
   log(`Preset selecionado: ${selectedPreset.name}`);
+  log(`URL primária: ${selectedPreset.urls[0]}`);
 }
 
 function selectLocalSoundFont(file) {
   selectedPreset = null;
+  lastSfontBuffer = null;
   els.selectedSoundFontLabel.textContent = file ? file.name : 'Nenhum';
   els.selectedSoundFontDetail.textContent = file ? `Arquivo local — ${formatBytes(file.size)}` : 'Selecione um preset remoto ou arquivo local.';
 }
@@ -198,13 +126,18 @@ async function readAsArrayBuffer(file) {
 }
 
 async function fetchArrayBufferWithProgress(url, label) {
-  const response = await fetch(url, { mode: 'cors', cache: 'force-cache' });
+  const response = await fetch(url, { mode: 'cors', cache: 'default' });
   if (!response.ok) {
-    throw new Error(`Falha ao baixar ${label}: HTTP ${response.status}`);
+    throw new Error(`HTTP ${response.status} ${response.statusText || ''}`.trim());
   }
+
+  const contentType = response.headers.get('content-type') || 'desconhecido';
   const contentLength = Number(response.headers.get('content-length')) || 0;
+  log(`${label}: resposta ${contentType}${contentLength ? `, ${formatBytes(contentLength)}` : ''}`);
+
   if (!response.body || !contentLength) {
     const buffer = await response.arrayBuffer();
+    validateSoundFontBuffer(buffer, label);
     log(`${label} baixado: ${formatBytes(buffer.byteLength)}`);
     return buffer;
   }
@@ -212,7 +145,7 @@ async function fetchArrayBufferWithProgress(url, label) {
   const reader = response.body.getReader();
   const chunks = [];
   let received = 0;
-  let lastLog = 0;
+  let lastLog = -1;
 
   while (true) {
     const { done, value } = await reader.read();
@@ -221,7 +154,7 @@ async function fetchArrayBufferWithProgress(url, label) {
     received += value.length;
 
     const pct = Math.floor((received / contentLength) * 100);
-    if (pct >= lastLog + 20 || pct === 100) {
+    if (pct >= lastLog + 25 || pct === 100) {
       lastLog = pct;
       log(`Baixando ${label}: ${pct}% (${formatBytes(received)} de ${formatBytes(contentLength)})`);
     }
@@ -233,17 +166,55 @@ async function fetchArrayBufferWithProgress(url, label) {
     combined.set(chunk, offset);
     offset += chunk.length;
   }
+
+  validateSoundFontBuffer(combined.buffer, label);
   return combined.buffer;
+}
+
+function validateSoundFontBuffer(buffer, label) {
+  const bytes = new Uint8Array(buffer.slice(0, Math.min(buffer.byteLength, 512)));
+  const ascii = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+
+  if (buffer.byteLength < 1024) {
+    throw new Error(`${label}: download muito pequeno (${formatBytes(buffer.byteLength)}). Provavelmente não é um SoundFont.`);
+  }
+  if (/^version https:\/\/git-lfs\.github\.com\/spec\/v1/.test(ascii)) {
+    throw new Error(`${label}: o link retornou um ponteiro Git LFS, não o arquivo binário real.`);
+  }
+  if (/<!doctype html|<html|rate limit|not found/i.test(ascii)) {
+    throw new Error(`${label}: o link retornou HTML/erro, não o arquivo SoundFont.`);
+  }
+
+  // SF2/SF3 normalmente é RIFF....sfbk. Alguns conversores podem variar,
+  // então isto é aviso, não bloqueio.
+  if (!ascii.startsWith('RIFF') || !ascii.includes('sfbk')) {
+    log(`Aviso: ${label} não tem assinatura RIFF/sfbk nos primeiros bytes; vou tentar carregar mesmo assim.`);
+  }
+}
+
+async function fetchPresetWithFallback(preset) {
+  let lastError = null;
+  for (const url of preset.urls) {
+    try {
+      log(`Tentando baixar por: ${url}`);
+      return await fetchArrayBufferWithProgress(url, preset.name);
+    } catch (err) {
+      lastError = err;
+      log(`Falhou: ${err.message || err}`);
+    }
+  }
+  throw new Error(`Não foi possível baixar ${preset.name}. Último erro: ${lastError?.message || lastError}`);
 }
 
 async function ensureEngineReady() {
   if (!window.JSSynth) {
-    throw new Error('A biblioteca JSSynth não carregou. Verifique a internet/CDN ou sirva os arquivos localmente.');
+    throw new Error('JSSynth não carregou. Verifique se você abriu via http://localhost e se a internet/CDN está acessível.');
   }
   await JSSynth.waitForReady();
 }
 
 async function resetSynth() {
+  loaded = false;
   if (synth) {
     try { await synth.stopPlayer(); } catch (_) {}
     try { synth.close(); } catch (_) {}
@@ -259,56 +230,48 @@ async function createSynth() {
   audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
   await audioContext.resume();
 
-  gainNode = gainNode || audioContext.createGain();
-  gainNode.gain.value = Number(els.gainSlider.value);
-  if (!gainNode.numberOfOutputs || gainNode.context.state) {
-    try { gainNode.disconnect(); } catch (_) {}
+  if (!gainNode) {
+    gainNode = audioContext.createGain();
+    gainNode.connect(audioContext.destination);
   }
-  gainNode.connect(audioContext.destination);
+  gainNode.gain.value = Number(els.gainSlider.value);
 
   synth = new JSSynth.Synthesizer();
   synth.init(audioContext.sampleRate);
 
   synthNode = synth.createAudioNode(audioContext, 8192);
   synthNode.connect(gainNode);
-
-  safeSetSynthSetting('synth.reverb.active', true);
-  safeSetSynthSetting('synth.chorus.active', true);
-}
-
-function safeSetSynthSetting(name, value) {
-  try {
-    if (typeof synth.setGain === 'function' && name === 'synth.gain') synth.setGain(value);
-    if (typeof synth.setReverb === 'function' && name === 'reverb') synth.setReverb(value);
-  } catch (err) {
-    log(`Aviso: não consegui aplicar ${name}: ${err.message}`);
-  }
 }
 
 async function getSoundFontBuffer() {
   const localFile = selectedFile(els.soundFontInput);
   if (localFile) {
     log(`SoundFont local: ${localFile.name} (${formatBytes(localFile.size)})`);
-    return await readAsArrayBuffer(localFile);
+    lastSfontBuffer = await readAsArrayBuffer(localFile);
+    validateSoundFontBuffer(lastSfontBuffer, localFile.name);
+    return lastSfontBuffer;
   }
   if (selectedPreset) {
+    if (lastSfontBuffer && els.selectedSoundFontLabel.textContent === selectedPreset.name) {
+      log(`Reusando SoundFont já baixado: ${selectedPreset.name}`);
+      return lastSfontBuffer;
+    }
     log(`SoundFont remoto: ${selectedPreset.name}`);
-    log(`URL: ${selectedPreset.url}`);
-    return await fetchArrayBufferWithProgress(selectedPreset.url, selectedPreset.name);
+    lastSfontBuffer = await fetchPresetWithFallback(selectedPreset);
+    return lastSfontBuffer;
   }
   throw new Error('Selecione um SoundFont local ou um preset remoto.');
 }
 
 async function loadFilesIntoSynth() {
   const midiFile = selectedFile(els.midiInput);
-
   if (!midiFile) {
     alert('Selecione um arquivo MIDI .mid/.midi.');
     return;
   }
 
   setControls(false);
-  setStatus('Carregando arquivos...', 'pending');
+  setStatus('Carregando...', 'pending');
   log(`MIDI: ${midiFile.name} (${formatBytes(midiFile.size)})`);
 
   try {
@@ -316,28 +279,27 @@ async function loadFilesIntoSynth() {
     await resetSynth();
     await createSynth();
 
-    const [sfontBuffer, smfBuffer] = await Promise.all([
-      getSoundFontBuffer(),
-      readAsArrayBuffer(midiFile),
-    ]);
+    const sfontBuffer = await getSoundFontBuffer();
+    lastMidiBuffer = await readAsArrayBuffer(midiFile);
 
-    setStatus('Carregando SoundFont...', 'pending');
+    setStatus('Carregando SoundFont no FluidSynth...', 'pending');
     currentSoundFontId = await synth.loadSFont(sfontBuffer);
-    log(`SoundFont carregado. ID: ${currentSoundFontId}`);
+    log(`SoundFont carregado no FluidSynth. ID: ${currentSoundFontId}`);
 
     setStatus('Carregando MIDI...', 'pending');
-    await synth.addSMFDataToPlayer(smfBuffer);
+    await synth.addSMFDataToPlayer(lastMidiBuffer);
     log('MIDI carregado no player interno do FluidSynth.');
 
     loaded = true;
-    paused = false;
     setControls(true);
     setStatus('Pronto para tocar', 'ready');
   } catch (err) {
     console.error(err);
     setStatus('Erro ao carregar', 'error');
     log(`ERRO: ${err.message || err}`);
+    log('Dica: teste primeiro com 2mb_gmgs.sf2. Se remoto falhar, abra o link no navegador, baixe o .sf2/.sf3 e carregue como arquivo local.');
     setControls(false);
+    await resetSynth();
   }
 }
 
@@ -351,18 +313,12 @@ async function play() {
   if (!loaded || !synth) return;
   try {
     await audioContext.resume();
-    if (paused && typeof synth.playPlayer === 'function') {
-      paused = false;
-    }
     await synth.playPlayer();
     setStatus('Tocando', 'ready');
     log('Playback iniciado.');
-
     synth.waitForPlayerStopped().then(() => {
-      if (!paused) {
-        setStatus('Playback finalizado', 'ready');
-        log('Playback finalizado.');
-      }
+      setStatus('Playback finalizado', 'ready');
+      log('Playback finalizado.');
     }).catch(() => {});
   } catch (err) {
     log(`ERRO no Play: ${err.message || err}`);
@@ -372,12 +328,9 @@ async function play() {
 async function pause() {
   if (!synth) return;
   try {
-    if (typeof synth.stopPlayer === 'function') {
-      await synth.stopPlayer();
-      paused = true;
-      setStatus('Pausado/parado', 'pending');
-      log('Playback pausado/parado. Observação: nesta API, Pause funciona como Stop suave.');
-    }
+    await synth.stopPlayer();
+    setStatus('Pausado/parado', 'pending');
+    log('Pause funciona como Stop nesta API. Para reiniciar do começo, carregue novamente e clique Play.');
   } catch (err) {
     log(`ERRO no Pause: ${err.message || err}`);
   }
@@ -387,7 +340,6 @@ async function stop() {
   if (!synth) return;
   try {
     await synth.stopPlayer();
-    paused = false;
     setStatus('Parado', 'ready');
     log('Playback parado. Para tocar novamente do início, clique em “Carregar no sintetizador” e depois Play.');
   } catch (err) {
@@ -407,6 +359,7 @@ function formatBytes(bytes) {
 }
 
 els.usePresetButton.addEventListener('click', () => {
+  lastSfontBuffer = null;
   selectPreset(Number(els.presetSelect.value));
 });
 
@@ -436,11 +389,11 @@ els.gainSlider.addEventListener('input', () => {
 });
 
 els.reverbSlider.addEventListener('input', () => {
-  log('Controle de Reverb preparado. Ajuste fino exige mapear parâmetros FluidSynth da versão carregada.');
+  log('Controle de Reverb visual apenas nesta versão.');
 });
 
 els.chorusSlider.addEventListener('input', () => {
-  log('Controle de Chorus preparado. Ajuste fino exige mapear parâmetros FluidSynth da versão carregada.');
+  log('Controle de Chorus visual apenas nesta versão.');
 });
 
 window.addEventListener('load', async () => {
@@ -450,6 +403,7 @@ window.addEventListener('load', async () => {
     await ensureEngineReady();
     setStatus('Motor FluidSynth pronto', 'ready');
     log('JSSynth/FluidSynth WebAssembly pronto.');
+    log('Build com libsndfile ativado para tentar suportar .sf3.');
     log(`${SOUND_FONT_PRESETS.length} presets remotos disponíveis.`);
   } catch (err) {
     setStatus('Falha ao inicializar', 'error');

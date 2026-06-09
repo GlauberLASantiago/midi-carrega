@@ -90,12 +90,12 @@
     </section>
 
     <footer>
-      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados via <code>fetch()</code>; se algum banco falhar, pode ser por CORS, tamanho, formato <code>.sf3</code> ou indisponibilidade do arquivo.</p>
+      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Presets remotos são carregados via <code>fetch()</code>; se algum banco falhar, pode ser por CORS, tamanho, arquivo indisponível, Git LFS ou licença/remoção no repositório remoto.</p>
     </footer>
   </main>
 
   <!-- Ordem exigida pela biblioteca: primeiro libfluidsynth, depois js-synthesizer. -->
-  <script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/externals/libfluidsynth-2.4.6.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/externals/libfluidsynth-2.4.6-with-libsndfile.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/dist/js-synthesizer.min.js"></script>
   <script src="app.js"></script>
 </body>
