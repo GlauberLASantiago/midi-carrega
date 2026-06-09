@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FluidSynth WebAssembly Player</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">FluidSynth + WebAssembly + SoundFont</p>
+        <h1>Player MIDI Web</h1>
+        <p class="subtitle">Carregue um SoundFont <strong>.sf2</strong> e um arquivo MIDI <strong>.mid/.midi</strong> para sintetizar áudio no navegador.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Inicializando motor...</span>
+      </div>
+    </header>
+
+    <section class="panel grid">
+      <label class="file-box">
+        <span>1. SoundFont (.sf2)</span>
+        <input id="soundFontInput" type="file" accept=".sf2,.sf3,audio/x-soundfont" />
+        <small id="soundFontName">Nenhum SoundFont selecionado</small>
+      </label>
+
+      <label class="file-box">
+        <span>2. MIDI (.mid/.midi)</span>
+        <input id="midiInput" type="file" accept=".mid,.midi,audio/midi" />
+        <small id="midiName">Nenhum MIDI selecionado</small>
+      </label>
+    </section>
+
+    <section class="panel controls">
+      <button id="loadButton" class="primary">Carregar no sintetizador</button>
+      <button id="playButton" disabled>Play</button>
+      <button id="pauseButton" disabled>Pause</button>
+      <button id="stopButton" disabled>Stop</button>
+    </section>
+
+    <section class="panel mixer">
+      <label>
+        Volume geral
+        <input id="gainSlider" type="range" min="0" max="1.5" value="0.8" step="0.01" />
+      </label>
+      <label>
+        Reverb
+        <input id="reverbSlider" type="range" min="0" max="1" value="0.25" step="0.01" />
+      </label>
+      <label>
+        Chorus
+        <input id="chorusSlider" type="range" min="0" max="1" value="0.15" step="0.01" />
+      </label>
+    </section>
+
+    <section class="panel log-panel">
+      <h2>Log</h2>
+      <pre id="log"></pre>
+    </section>
+
+    <footer>
+      <p>Este protótipo usa <code>js-synthesizer</code>, que encapsula FluidSynth/WebAssembly. Para melhores resultados, use um SoundFont General MIDI, como FluidR3 GM, GeneralUser GS ou MuseScore General.</p>
+    </footer>
+  </main>
+
+  <!-- Ordem exigida pela biblioteca: primeiro libfluidsynth, depois js-synthesizer. -->
+  <script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/externals/libfluidsynth-2.4.6.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-synthesizer@1.13.0/dist/js-synthesizer.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
